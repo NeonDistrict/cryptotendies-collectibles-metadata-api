@@ -1,6 +1,9 @@
 // Core Modules
 const express = require('express');
 const server  = express();
+const cors    = require('cors');
+
+server.use(cors());
 
 // Config
 const PORT = process.env.PORT || 5000;
