@@ -50,7 +50,7 @@ async function getAddress(req, res) {
 			responseBox.data.data.hasOwnProperty('tokens') &&
 			responseBox.data.data.tokens.length
 		) {
-			boxes = data.data.tokens;
+			boxes = responseBox.data.data.tokens;
 		}
 
 		let contractCard = contracts['TENDIES_CARD'][req.params.network];
@@ -62,7 +62,7 @@ async function getAddress(req, res) {
 			responseCard.data.data.hasOwnProperty('tokens') &&
 			responseCard.data.data.tokens.length
 		) {
-			cards = data.data.tokens;
+			cards = responseCard.data.data.tokens;
 		}
 
 		return util.sendResponse(
@@ -73,6 +73,7 @@ async function getAddress(req, res) {
 			}
 		);
 	} catch (ex) {
+		console.error(ex);
 		return util.sendResponse(
 			res,
 			{'error' : 'Could not retrieve address.'}
