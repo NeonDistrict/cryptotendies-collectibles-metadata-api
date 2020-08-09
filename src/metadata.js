@@ -1,5 +1,6 @@
 const path = require('path');
 const fs   = require('fs');
+const util = require('./utils/common.js');
 
 const sets    = JSON.parse(fs.readFileSync(path.join(__dirname, '/../data/sets.json'), 'utf8'));
 const classes = JSON.parse(fs.readFileSync(path.join(__dirname, '/../data/classes.json'), 'utf8'));
@@ -8,17 +9,17 @@ const cards   = JSON.parse(fs.readFileSync(path.join(__dirname, '/../data/cards.
 
 function getCard(req, res) {
 	if (!req.params.id) {
-		return sendResponse(res, "Missing :ID parameter");
+		return util.sendResponse(res, "Missing :ID parameter");
 	}
 
-	let card = findById(cards, parseInt(req.params.id, 10));
+	let card = util.findById(cards, parseInt(req.params.id, 10));
 
 	if (!card) {
-		return sendResponse(res, "Invalid :ID parameter");
+		return util.sendResponse(res, "Invalid :ID parameter");
 	}
 
-	let set = findById(sets, card.set);
-	let _class = findById(classes, card.class);
+	let set = util.findById(sets, card.set);
+	let _class = util.findById(classes, card.class);
 
 	let payload = formatOpenSeaMetadata(
 		card.name || "CryptoTendie #" + String(card.id),
@@ -41,7 +42,7 @@ function getCard(req, res) {
 		]
 	);
 
-	return sendResponse(
+	return util.sendResponse(
 		res,
 		payload
 	);
@@ -49,16 +50,16 @@ function getCard(req, res) {
 
 function getBox(req, res) {
 	if (!req.params.id) {
-		return sendResponse(res, "Missing :ID parameter");
+		return util.sendResponse(res, "Missing :ID parameter");
 	}
 
-	let box = findById(boxes, parseInt(req.params.id, 10));
+	let box = util.findById(boxes, parseInt(req.params.id, 10));
 
 	if (!box) {
-		return sendResponse(res, "Invalid :ID parameter");
+		return util.sendResponse(res, "Invalid :ID parameter");
 	}
 
-	let set = findById(sets, box.set);
+	let set = util.findById(sets, box.set);
 
 	let payload = formatOpenSeaMetadata(
 		box.name,
@@ -82,7 +83,7 @@ function getBox(req, res) {
 		]
 	);
 
-	return sendResponse(
+	return util.sendResponse(
 		res,
 		payload
 	);
@@ -96,36 +97,6 @@ function formatOpenSeaMetadata(name, desc, image, attributes) {
 		"external_url": "https://tendies.dev",
 		"attributes": attributes
 	};
-}
-
-function findById(arrayOfObjects, id) {
-	// Validation
-	if (id <= 0 || arrayOfObjects.length < id) {
-		return false;
-	}
-
-	// Short-circuit
-	if (arrayOfObjects[id-1].id === id) {
-		return arrayOfObjects[id-1];
-	}
-
-	// Fallback: iteration
-	for (let obj of arrayOfObjects) {
-		if (obj.id === id) {
-			return obj;
-		}
-	}
-
-	return false;
-}
-
-function sendResponse(res, payload) {
-	if (typeof payload == 'string') {
-		payload = { 'msg' : payload };
-	}
-
-	res.send(payload);
-	return res.end();
 }
 
 module.exports = {
