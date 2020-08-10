@@ -41,7 +41,7 @@ async function getAddress(req, res) {
 		let apiUrl = apiEndpoint.replace('{networkName}', network).replace('{address}', address);
 
 		// Get the boxes
-		let contractBox = contracts['TENDIES_BOX'][req.params.network];
+		let contractBox = contracts['tendiesBox'][req.params.network];
 		let responseBox = await axios.get(apiUrl.replace('{contract}', contractBox), {timeout: 2500});
 
 		let boxes = [];
@@ -53,7 +53,7 @@ async function getAddress(req, res) {
 			boxes = responseBox.data.data.tokens;
 		}
 
-		let contractCard = contracts['TENDIES_CARD'][req.params.network];
+		let contractCard = contracts['tendiesCard'][req.params.network];
 		let responseCard = await axios.get(apiUrl.replace('{contract}', contractCard), {timeout: 2500});
 
 		let cards = [];
