@@ -244,7 +244,7 @@
 	{
 		"id" : 23,
 		"set" : 1,
-		"name" : "hands off",
+		"name" : "Hands Off",
 		"class" : 1,
 		"image" : "hands+off.jpg",
 		"desc" : "A CryptoTendies Collectible Card, the Official Collectible Card Game of the Tendies Ultraverse.",
@@ -288,7 +288,7 @@
 	{
 		"id" : 27,
 		"set" : 1,
-		"name" : "hoop dreams",
+		"name" : "Hoop Dreams",
 		"class" : 1,
 		"image" : "hoop+dreams.jpg",
 		"desc" : "A CryptoTendies Collectible Card, the Official Collectible Card Game of the Tendies Ultraverse.",
@@ -574,7 +574,7 @@
 	{
 		"id" : 53,
 		"set" : 1,
-		"name" : "the Dream Team",
+		"name" : "The Dream Team",
 		"class" : 1,
 		"image" : "the+Dream+Team.jpg",
 		"desc" : "A CryptoTendies Collectible Card, the Official Collectible Card Game of the Tendies Ultraverse.",
@@ -607,7 +607,7 @@
 	{
 		"id" : 56,
 		"set" : 1,
-		"name" : "the secret sauce",
+		"name" : "The Secret Sauce",
 		"class" : 1,
 		"image" : "the+secret+sauce.jpg",
 		"desc" : "A CryptoTendies Collectible Card, the Official Collectible Card Game of the Tendies Ultraverse.",
