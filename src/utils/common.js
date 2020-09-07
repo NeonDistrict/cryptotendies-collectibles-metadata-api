@@ -28,7 +28,13 @@ function sendResponse(res, payload) {
 	return res.end();
 }
 
+function getSpiceLevel(spiciness) {
+	let spices = ["Wimpy","Cruisin'","Red Chile","Habanero","Ghost"];
+	return spices.indexOf(spiciness) + 1; // Yes, this is 0 if non-existent
+}
+
 module.exports = {
 	findById,
-	sendResponse
+	sendResponse,
+	getSpiceLevel
 };

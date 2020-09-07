@@ -51,7 +51,8 @@ function getCards(req, res) {
 		parsedCard.setName = set.name;
 		parsedCard.setId = set.id;
 		parsedCard.class = _class.name;
-		parsedCard.image = "https://i.imgur.com/" + parsedCard.image;
+		parsedCard.image = "https://cryptotendies.s3.amazonaws.com/" + parsedCard.image;
+		parsedCard.spiceLevel = util.getSpiceLevel(parsedCard.spiciness);
 
 		parsed.push(parsedCard);
 	}

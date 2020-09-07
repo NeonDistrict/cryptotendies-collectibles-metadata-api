@@ -7,11 +7,6 @@ const classes = JSON.parse(fs.readFileSync(path.join(__dirname, '/../data/classe
 const boxes   = JSON.parse(fs.readFileSync(path.join(__dirname, '/../data/boxes.json'), 'utf8'));
 const cards   = JSON.parse(fs.readFileSync(path.join(__dirname, '/../data/cards.json'), 'utf8'));
 
-function getSpiceLevel(spiciness) {
-	let spices = ["Wimpy","Cruisin'","Red Chile","Habanero","Ghost"];
-	return spices.indexOf(spiciness) + 1; // Yes, this is 0 if non-existent
-}
-
 function getCard(req, res) {
 	if (!req.params.id) {
 		return util.sendResponse(res, "Missing :ID parameter");
@@ -58,7 +53,7 @@ function getCard(req, res) {
 			},
 			{
 				"trait_type": "Spice Level",
-				"value": getSpiceLevel(card.spiciness)
+				"value": util.getSpiceLevel(card.spiciness)
 			}
 		]
 	);
