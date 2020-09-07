@@ -7,6 +7,11 @@ const classes = JSON.parse(fs.readFileSync(path.join(__dirname, '/../data/classe
 const boxes   = JSON.parse(fs.readFileSync(path.join(__dirname, '/../data/boxes.json'), 'utf8'));
 const cards   = JSON.parse(fs.readFileSync(path.join(__dirname, '/../data/cards.json'), 'utf8'));
 
+function getSpiceLevel(spiciness) {
+	let spices = ["Wimpy","Cruisin'","Red Chile","Habanero","Ghost"];
+	return spices.indexOf(spiciness) + 1; // Yes, this is 0 if non-existent
+}
+
 function getCard(req, res) {
 	if (!req.params.id) {
 		return util.sendResponse(res, "Missing :ID parameter");
@@ -24,7 +29,7 @@ function getCard(req, res) {
 	let payload = formatOpenSeaMetadata(
 		card.name || "CryptoTendie #" + String(card.id),
 		card.desc,
-		"https://i.imgur.com/" + card.image,
+		"https://cryptotendies.s3.amazonaws.com/" + card.image,
 		[
 			{
 				"display_type": "number",
@@ -38,6 +43,22 @@ function getCard(req, res) {
 			{
 				"trait_type": "Rarity",
 				"value": _class.name
+			},
+			{
+				"trait_type": "Flavor",
+				"value": card.flavor
+			},
+			{
+				"trait_type": "Seasoning",
+				"value": card.seasoning
+			},
+			{
+				"trait_type": "Spiciness",
+				"value": card.spiciness
+			},
+			{
+				"trait_type": "Spice Level",
+				"value": getSpiceLevel(card.spiciness)
 			}
 		]
 	);
