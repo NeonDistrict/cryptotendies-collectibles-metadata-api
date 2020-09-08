@@ -53,6 +53,7 @@ function getCards(req, res) {
 		parsedCard.class = _class.name;
 		parsedCard.image = "https://cryptotendies.s3.amazonaws.com/" + parsedCard.image;
 		parsedCard.spiceLevel = util.getSpiceLevel(parsedCard.spiciness);
+		parsedCard.desc = parsedCard.desc || "A CryptoTendies Collectible Card, the Official Collectible Card Game of the Tendies Ultraverse.";
 
 		parsed.push(parsedCard);
 	}

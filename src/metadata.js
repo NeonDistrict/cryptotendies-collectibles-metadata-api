@@ -23,7 +23,7 @@ function getCard(req, res) {
 
 	let payload = formatOpenSeaMetadata(
 		card.name || "CryptoTendie #" + String(card.id),
-		card.desc,
+		card.desc || "A CryptoTendies Collectible Card, the Official Collectible Card Game of the Tendies Ultraverse.",
 		"https://cryptotendies.s3.amazonaws.com/" + card.image,
 		[
 			{
