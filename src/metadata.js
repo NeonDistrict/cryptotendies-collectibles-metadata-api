@@ -12,7 +12,12 @@ function getCard(req, res) {
 		return util.sendResponse(res, "Missing :ID parameter");
 	}
 
-	let card = util.findById(cards, parseInt(req.params.id, 10));
+	let card;
+	if (req.params.id.length == 64) {
+		card = util.findById(cards, parseInt(req.params.id, 16));
+	} else {
+		card = util.findById(cards, parseInt(req.params.id, 10));
+	}
 
 	if (!card) {
 		return util.sendResponse(res, "Invalid :ID parameter");
@@ -69,7 +74,12 @@ function getBox(req, res) {
 		return util.sendResponse(res, "Missing :ID parameter");
 	}
 
-	let box = util.findById(boxes, parseInt(req.params.id, 10));
+	let box;
+	if (req.params.id.length == 64) {
+		box = util.findById(boxes, parseInt(req.params.id, 16));
+	} else {
+		box = util.findById(boxes, parseInt(req.params.id, 10));
+	}
 
 	if (!box) {
 		return util.sendResponse(res, "Invalid :ID parameter");
